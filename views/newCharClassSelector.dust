@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+		<style type="text/css">
+			.hidden{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+		<h1>Select your Class:</h1>
+		<div>Class:</div>
+			<form action="/toDoPage" method="post">
+				<div id="classList">
+					{#classes}
+						<input type="radio" name="playerClass" value="{ClassName}"/>{ClassName}
+					<br/>
+					{/classes}
+				</div>
+					{#classes}
+						<div id="{ClassName}" class="hidden">
+							<h1>Select Class Archtype:</h1>
+							<input type="radio" value="None" name="archetype">None
+							<br/>
+							{#Archetypes}
+								<input type="radio" value="{archetypeName}" name="archetype"/>{archetypeName}
+								<br/>
+							{/Archetypes}
+						</div>
+					{/classes}
+					<br/>
+				<input type="submit" class="btn btn-primary" value="Select"/>
+			</form>
+		</div>
+		<script type="text/javascript">
+			document.getElementById("classList").addEventListener('change', function(event) {
+				var selected = event.target;
+				var visable = document.getElementsByClassName('visable');
+				var i;
+				for(i = 0; i < visable.length; i++){
+					visable[i].className = "hidden";
+				}
+				document.getElementById(selected.value).className = "visable";
+				console.log(document.getElementById(selected.value));
+			});
+		</script>
+	</body>
+</html>

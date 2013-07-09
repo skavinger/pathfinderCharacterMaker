@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+  {+pageHeader/}
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="span2">
+
+    </div>
+    <div class="span10">
+      {+bodyContent/}
+    </div>
+  </div>
+  {+pageFooter/}
+</body>
+</html>

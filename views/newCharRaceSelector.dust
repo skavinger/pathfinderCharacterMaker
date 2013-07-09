@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+    <style type="text/css">
+      .hidden{
+        display: none;
+      }
+    </style>
+	</head>
+	<body>
+    <div class="container">
+      <h1>Select your Race:</h1>
+      <form action= "/newChar/classSelect" method="post">
+        <div id="races">
+          <div>Races:</div>
+          {#races}
+            <input type="radio" value="{Name}" name="Race">{Name}
+            <br/>
+          {/races}
+        </div>
+        {#races}
+          <div id="{Name}" class="hidden">
+            <h1>Select Racial Traits</h1>
+            {#altTraits}
+              <div>{replaces}:</div>
+              {#options}
+                <input type="radio" class="{replaces)" name="{replaces}" value="{Name}">{Name}
+                <br/>
+              {/options}
+            {/altTraits}
+          </div>
+        {/races}
+        <br/>
+        <input type="submit" class="btn btn-primary" value="Next">
+      </form>
+    </div>
+    <script type="text/javascript">
+      document.getElementById("races").addEventListener('change', function(event) {
+        var selected = event.target;
+        var visable = document.getElementsByClassName('visable');
+        var i;
+        for(i = 0; i < visable.length; i++){
+          visable[i].className = "hidden";
+        }
+        document.getElementById(selected.value).className = "visable";
+      });
+    </script>
+	</body>
+</html>

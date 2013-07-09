@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+  <style type="text/css">
+    .hidden{
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Select your method of attribute alocation:</h1>
+    <div id="selector">
+      <label class="radio inline">
+        <input type="radio" name="mode" id="point" checked value="point">Point
+      </label>
+      <label class="radio inline">
+        <input type="radio" name="mode" id="roll" value="roll">Roll
+      </label>
+    </div>
+    <h1>Attributes</h1>
+    <div class="visable" id="pointContainer">
+        <form action="/newChar/raceSelect" method="post">
+          <div class="row">
+            <div class="span1">Str:</div>
+            <div class="span2"><input type="number" min="7" max ="18" value="10" id="pointStr" name="Str"></div>
+          </div>
+          <div class="row">
+            <div class="span1">Dex:</div>
+            <div class="span2"><input type="number" min="7" max ="18" value="10" id="pointDex" name="Dex"></div>
+          </div>
+          <div class="row">
+            <div class="span1">Con:</div>
+            <div class="span2"><input type="number" min="7" max ="18" value="10" id="pointCon" name="Con"></div>
+          </div>
+          <div class="row">
+            <div class="span1">Int:</div>
+            <div class="span2"><input type="number" min="7" max ="18" value="10" id="pointInt" name="Int"></div>
+          </div>
+          <div class="row">
+            <div class="span1">Wis:</div>
+            <div class="span2"><input type="number" min="7" max ="18" value="10" id="pointWis" name="Wis"></div>
+          </div>
+          <div class="row">
+            <div class="span1">Cha:</div>
+            <div class="span2"><input type="number" min="7" max ="18" value="10" id="pointCha" name="Cha"></div>
+          </div>
+          <div id="pointsSpent">Points Spent: 0 </div>
+          <br/>
+          <input type="submit" class="btn btn-primary" value="Next">
+        </form>
+      </div>
+    <div class="hidden" id="rollContainer">
+      <form action="/newChar/raceSelect" method="post">
+        <div class="row">
+          <div class="span1">Str:</div>
+          <div class="span2"><input type="number" value="10" id="rollStr" name="Str"></div>
+        </div>
+        <div class="row">
+          <div class="span1">Dex:</div>
+          <div class="span2"><input type="number" value="10" id="rollDex" name="Dex"></div>
+        </div>
+        <div class="row">
+          <div class="span1">Con:</div>
+          <div class="span2"><input type="number" value="10" id="rollCon" name="Con"></div>
+        </div>
+        <div class="row">
+          <div class="span1">Int:</div>
+          <div class="span2"><input type="number" value="10" id="rollInt" name="Int"></div>
+        </div>
+        <div class="row">
+          <div class="span1">Wis:</div>
+          <div class="span2"><input type="number" value="10" id="rollWis" name="Wis"></div>
+        </div>
+        <div class="row">
+          <div class="span1">Cha:</div>
+          <div class="span2"><input type="number" value="10" id="rollCha" name="Cha"></div>
+        </div>
+        <br/>
+        <input type="button" class="btn" value="Roll!" id="rollButton">
+        <input type="submit" class="btn btn-primary" value="Next">
+      </form>
+    </div>
+  </div>
+  <script type="text/javascript">
+    document.getElementById('rollButton').addEventListener('click', function () {
+      document.getElementById('rollStr').value = rollStat();
+      document.getElementById('rollDex').value = rollStat();
+      document.getElementById('rollCon').value = rollStat();
+      document.getElementById('rollInt').value = rollStat();
+      document.getElementById('rollWis').value = rollStat();
+      document.getElementById('rollCha').value = rollStat();
+    });
+    function rollStat () {
+      var die1 = Math.floor(Math.random()*6) + 1;
+      var die2 = Math.floor(Math.random()*6) + 1;
+      var die3 = Math.floor(Math.random()*6) + 1;
+      var die4 = Math.floor(Math.random()*6) + 1;
+      return die1 + die2 + die3 + die4 - Math.min(die1, die2, die3, die4); 
+    }
+    document.getElementById('selector').addEventListener('change', function (event) {
+      var selected = event.target;
+      var visable = document.getElementsByClassName('visable');
+      var i;
+      for(i = 0; i < visable.length; i++){
+        visable[i].className = "hidden";
+      }
+      document.getElementById(selected.value + "Container").className = "visable";
+    });
+    document.getElementById('pointContainer').addEventListener('change', function () {
+      var points = 0;
+      points += pointCalc(document.getElementById('pointStr').value);
+      points += pointCalc(document.getElementById('pointDex').value);
+      points += pointCalc(document.getElementById('pointCon').value);
+      points += pointCalc(document.getElementById('pointInt').value);
+      points += pointCalc(document.getElementById('pointWis').value);
+      points += pointCalc(document.getElementById('pointCha').value);
+      document.getElementById('pointsSpent').innerHTML = "Points Spent: " + points;
+    });
+    function pointCalc (value) {
+      if (value == 7){
+        return -4;
+      } else if (value == 8) {
+        return -2;
+      } else if (value == 9) {
+        return -1;
+      } else if (value == 10) {
+        return 0;
+      } else if (value == 11) {
+        return 1;
+      } else if (value == 12) {
+        return 2;
+      } else if (value == 13) {
+        return 3;
+      } else if (value == 14) {
+        return 5;
+      } else if (value == 15) {
+        return 7;
+      } else if (value == 16) {
+        return 10;
+      } else if (value == 17) {
+        return 13;
+      } else if (value == 18) {
+        return 17;
+      } else {
+        return 0;
+      }
+    }
+  </script>
+</body>
+</html>

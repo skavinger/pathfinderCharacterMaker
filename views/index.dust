@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/index.css"></link>
+	</head>
+	<body>
+		<div id="title">Welcome to Pathfinder Character Creator {version}</div>
+		<div id="newChar"><a href="/newChar/attributeSet"><input type ="button" value="New Character"></a></div>
+		<div id="loadChar"><a href="/loadChar"><input type ="button" value="Load Character"></a></div>
+	</body>
+</html>

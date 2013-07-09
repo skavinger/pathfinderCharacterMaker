@@ -1,0 +1,9 @@
+{>baseTemplate/}
+
+{<bodyContent}
+<ul>
+  {#to_do}
+    <li>{to_do}</li>
+  {/to_do}
+</ul>
+{/bodyContent}
