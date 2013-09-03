@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+  <style type="text/css">
+    .cSkill{
+      font-weight: bold;
+    }
+    .featContainer{
+      border: groove;
+      background-color: #C7C7C7;
+    }
+    .toDoContainer{
+      border: groove;
+      background-color: #C7C7C7;
+      padding: 1%;
+    }
+    .tabs-left{
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="tabbable tabs-left">
+      <ul class="nav nav-tabs" id='sideBar' data-tabs="tabs">
+        <li><a id="attributesPage" href="#attributesPage" data-toggle="tab">Attributes</a></li>
+        <li><a id="skillsPage" href="#skillsPage" data-toggle="tab">Skills</a></li>
+        <li><a id="discription" href="#discription" data-toggle="tab">Discription</a></li>
+        <li><a id="ACandSaves" href="#ACandSaves" data-toggle="tab">AC and Saves</a></li>
+        <li><a id="combat" href="#combat" data-toggle="tab">Combat</a></li>
+        <li><a id="Feats" href="#Feats" data-toggle="tab">Feats</a></li>
+        <li><a id="Spells" href="#Spells" data-toggle="tab">Spells</a></li>
+        <li class="selectedTab active"><a id="toDoPage" href="#toDoPage" data-toggle="tab">To Do</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane" id="attributesPageContainer">
+          <div class="row">
+            <div class="span10"><h2>Attributes</h2></div>
+          </div>
+          <div class='row'>
+            <div class='span1'>Str:</div>
+            <div class="span1" title="Total">{attributeCalc.Str}</div>
+            <div class='span1' title="Base">{attributes.Str}</div>
+            {#attributeMod}
+              {@if cond="'{Attribute}' == 'Str'"}
+                <div class="span1" title="{type}">+{value}</div>
+              {/if}
+            {/attributeMod}
+          </div>
+          <div class='row'>
+            <div class='span1'>Dex:</div>
+            <div class="span1" title="Total">{attributeCalc.Dex}</div>
+            <div class='span1' title="Base">{attributes.Dex}</div>
+            {#attributeMod}
+              {@if cond="'{Attribute}' == 'Dex'"}
+                <div class="span1" title="{type}">+{value}</div>
+              {/if}
+            {/attributeMod}
+          </div>
+          <div class='row'>
+            <div class='span1' title="Total">Con:</div>
+            <div class="span1">{attributeCalc.Con}</div>
+            <div class='span1' title="Base">{attributes.Con}</div>
+            {#attributeMod}
+              {@if cond="'{Attribute}' == 'Con'"}
+                <div class="span1" title="{type}">+{value}</div>
+              {/if}
+              {/attributeMod}
+          </div>
+          <div class='row'>
+            <div class='span1'>Int:</div>
+            <div class="span1" title="Total">{attributeCalc.Int}</div>
+            <div class='span1' title="Base">{attributes.Int}</div>
+            {#attributeMod}
+              {@if cond="'{Attribute}' == 'Int'"}
+                <div class="span1" title="{type}">+{value}</div>
+              {/if}
+            {/attributeMod}
+          </div>
+          <div class='row'>
+            <div class='span1'>Wis:</div>
+            <div class="span1" title="Total">{attributeCalc.Wis}</div>
+            <div class='span1' title="Base">{attributes.Wis}</div>
+            {#attributeMod}
+              {@if cond="'{Attribute}' == 'Wis'"}
+                <div class="span1" title="{type}">+{value}</div>
+              {/if}
+            {/attributeMod}
+          </div>
+          <div class='row'>
+            <div class='span1'>Cha:</div>
+            <div class="span1" title="Total">{attributeCalc.Cha}</div>
+            <div class='span1' title="Base">{attributes.Cha}</div>
+            {#attributeMod}
+              {@if cond="'{Attribute}' == 'Cha'"}
+                <div class="span1" title="{type}">+{value}</div>
+              {/if}
+            {/attributeMod}
+          </div>
+          <form method="post" action="/updateAttributeMod">
+            <div class"row">
+              <div class="span10"><h2>Add Attribute Mod</h2></div>
+            </div>
+            <div class="row">
+              <div class="span1">Attrubute:</div>
+              <div class="span1">
+                <select name="attribute">
+                  <option value="Str">Str</option>
+                  <option value="Dex">Dex</option>
+                  <option value="Con">Con</option>
+                  <option value="Int">Int</option>
+                  <option value="Wis">Wis</option>
+                  <option value="Cha">Cha</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="span1">Value:</div>
+              <div class="span1">
+                <input name="value" type='number' value='0'/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="span1">Type:</div>
+              <div class="span1">
+                <input name='type' type="text">
+              </div>
+            </div>
+            <div class="row">
+              <div class="span1">
+                <input type="submit" class="btn" value="Add">
+              </div>
+            </div>
+          </form>
+          <form method="post" action="/removeAttributeMod">
+            <div class="row">
+              <div class="span10"><h2>Remove Attribute Mod</h2></div>
+            </div>
+            <div class='row'>
+              <div class="span1">
+                <select name="remove">
+                  {#attributeMod}
+                    <option value="{Attribute}:{value}:{type}">{Attribute}:{value}:{type}</option>
+                  {/attributeMod}
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="span1">
+                <input type="submit" class="btn" value="Remove">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="tab-pane" id="skillsPageContainer">
+          <form method="post" action="/updateSkills">
+            <div class='row'>
+              <div class='span10'>
+                <h2>Skills</h2>
+              </div>
+            </div>
+            {>skillRow skillName="acrobatics" skillMods=skillMod classSkill=classSkills.acrobatics skillVal=skills.acrobatics /}
+            {>skillRow skillName="appraise" skillMods=skillMod classSkill=classSkills.appraise skillVal=skills.appraise /}
+            {>skillRow skillName="bluff" skillMods=skillMod classSkill=classSkills.bluff skillVal=skills.bluff /}
+            {>skillRow skillName="climb" skillMods=skillMod classSkill=classSkills.climb skillVal=skills.climb /}
+            {>skillRow skillName="craft" skillMods=skillMod classSkill=classSkills.craft skillVal=skills.craft /}
+            {>skillRow skillName="diplomacy" skillMods=skillMod classSkill=classSkills.diplomacy skillVal=skills.diplomacy /}
+            {>skillRow skillName="disable_device" skillMods=skillMod classSkill=classSkills.disable_device skillVal=skills.disable_device /}
+            {>skillRow skillName="disguise" skillMods=skillMod classSkill=classSkills.disguise skillVal=skills.disguise /}
+            {>skillRow skillName="escape_artist" skillMods=skillMod classSkill=classSkills.escape_artist skillVal=skills.escape_artist /}
+            {>skillRow skillName="fly" skillMods=skillMod classSkill=classSkills.fly skillVal=skills.fly /}
+            {>skillRow skillName="handle_animal" skillMods=skillMod classSkill=classSkillshandle_animal skillVal=skills.handle_animal /}
+            {>skillRow skillName="heal" skillMods=skillMod classSkill=classSkills.heal skillVal=skills.heal /}
+            {>skillRow skillName="intimidate" skillMods=skillMod classSkill=classSkills.intimidate skillVal=skills.intimidate /}
+            {>skillRow skillName="kn_Arcana" skillMods=skillMod classSkill=classSkills.kn_Arcana skillVal=skills.kn_Arcana /}
+            {>skillRow skillName="kn_Dungeoneering" skillMods=skillMod classSkill=classSkills.kn_Dungeoneering skillVal=skills.kn_Dungeoneering /}
+            {>skillRow skillName="kn_Engineering" skillMods=skillMod classSkill=classSkills.kn_Engineering skillVal=skills.kn_Engineering /}
+            {>skillRow skillName="kn_Geography" skillMods=skillMod classSkill=classSkills.kn_Geography skillVal=skills.kn_Geography /}
+            {>skillRow skillName="kn_History" skillMods=skillMod classSkill=classSkills.kn_History skillVal=skills.kn_History /}
+            {>skillRow skillName="kn_Local" skillMods=skillMod classSkill=classSkills.kn_Local skillVal=skills.kn_Local /}
+            {>skillRow skillName="kn_Nature" skillMods=skillMod classSkill=classSkills.kn_Nature skillVal=skills.kn_Nature /}
+            {>skillRow skillName="kn_Nobility" skillMods=skillMod classSkill=classSkills.kn_Nobility skillVal=skills.kn_Nobility /}
+            {>skillRow skillName="kn_Planes" skillMods=skillMod classSkill=classSkills.kn_Planes skillVal=skills.kn_Planes /}
+            {>skillRow skillName="kn_Religion" skillMods=skillMod classSkill=classSkills.kn_Religion skillVal=skills.kn_Religion /}
+            {>skillRow skillName="linguistics" skillMods=skillMod classSkill=classSkills.linguistics skillVal=skills.linguistics /}
+            {>skillRow skillName="perception" skillMods=skillMod classSkill=classSkills.perception skillVal=skills.perception /}
+            {>skillRow skillName="perform_Act" skillMods=skillMod classSkill=classSkills.perform_Act skillVal=skills.perform_Act /}
+            {>skillRow skillName="perform_Comedy" skillMods=skillMod classSkill=classSkills.perform_Comedy skillVal=skills.perform_Comedy /}
+            {>skillRow skillName="perform_Dance" skillMods=skillMod classSkill=classSkills.perform_Dance skillVal=skills.perform_Dance /}
+            {>skillRow skillName="perform_Keyboard" skillMods=skillMod classSkill=classSkills.perform_Keyboard skillVal=skills.perform_Keyboard /}
+            {>skillRow skillName="perform_Oratory" skillMods=skillMod classSkill=classSkills.perform_Oratory skillVal=skills.perform_Oratory /}
+            {>skillRow skillName="perform_Percussion" skillMods=skillMod classSkill=classSkills.perform_Percussion skillVal=skills.perform_Percussion /}
+            {>skillRow skillName="perform_String" skillMods=sskillMod classSkill=classSkills.perform_String skillVal=skills.perform_String /}
+            {>skillRow skillName="perform_Wind" skillMods=skillMod classSkill=classSkills.perform_Wind skillVal=skills.perform_Wind /}
+            {>skillRow skillName="perform_Sing" skillMods=skillMod classSkill=classSkills.perform_Sing skillVal=skills.perform_Sing /}
+            {>skillRow skillName="profession" skillMods=skillMod classSkill=classSkills.profession skillVal=skills.profession /}
+            {>skillRow skillName="ride" skillMods=skillMod classSkill=classSkills.ride skillVal=skills.ride /}
+            {>skillRow skillName="sense_motive" skillMods=skillMod classSkill=classSkills.sense_motive skillVal=skills.sense_motive /}
+            {>skillRow skillName="sleight_of_hand" skillMods=skillMod classSkill=classSkills.sleight_of_hand skillVal=skills.sleight_of_hand /}
+            {>skillRow skillName="spellcraft" skillMods=skillMod classSkill=classSkills.spellcraft skillVal=skills.spellcraft /}
+            {>skillRow skillName="stealth" skillMods=skillMod classSkill=classSkills.stealth skillVal=skills.stealth /}
+            {>skillRow skillName="survival" skillMods=skillMod classSkill=classSkills.survival skillVal=skills.survival /}
+            {>skillRow skillName="swim" skillMods=skillMod classSkill=classSkills.swim skillVal=skills.swim /}
+            {>skillRow skillName="use_magic_device" skillMods=skillMod classSkill=classSkills.use_magic_device skillVal=skills.use_magic_device /}
+            <input type="submit" class="btn" value="Update">
+          </form>
+          <form method='post' action='/addSkillMod'>
+            <div class='row'>
+              <div class='span10'>
+                <h2>Add Skill Mod</h2>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='span1'>
+                Skill:
+              </div>
+              <div class="span1">
+                <select name='skill'>
+                  <option value='acrobatics'>acrobatics</option>
+                  <option value='appraise'>appraise</option>
+                  <option value='bluff'>bluff</option>
+                  <option value='climb'>climb</option>
+                  <option value='craft'>craft</option>
+                  <option value='diplomacy'>diplomacy</option>
+                  <option value='disable_device'>disable_device</option>
+                  <option value='disguise'>disguise</option>
+                  <option value='escape_artist'>escape_artist</option>
+                  <option value='fly'>fly</option>
+                  <option value='handle_animal'>handle_animal</option>
+                  <option value='heal'>heal</option>
+                  <option value='intimidate'>intimidate</option>
+                  <option value='kn_Arcana'>kn_Arcana</option>
+                  <option value='kn_Dungeoneering'>kn_Dungeoneering</option>
+                  <option value='kn_Engineering'>kn_Engineering</option>
+                  <option value='kn_Geography'>kn_Geography</option>
+                  <option value='kn_History'>kn_History</option>
+                  <option value='kn_Local'>kn_Local</option>
+                  <option value='kn_Nature'>kn_Nature</option>
+                  <option value='kn_Nobility'>kn_Nobility</option>
+                  <option value='kn_Planes'>kn_Planes</option>
+                  <option value='kn_Religion'>kn_Religion</option>
+                  <option value='linguistics'>linguistics</option>
+                  <option value='perception'>perception</option>
+                  <option value='perform_Act'>perform_Act</option>
+                  <option value='perform_Comedy'>perform_Comedy</option>
+                  <option value='perform_Dance'>perform_Dance</option>
+                  <option value='perform_Keyboard'>perform_Keyboard</option>
+                  <option value='perform_Oratory'>perform_Oratory</option>
+                  <option value='perform_Percussion'>perform_Percussion</option>
+                  <option value='perform_String'>perform_String</option>
+                  <option value='perform_Wind'>perform_Wind</option>
+                  <option value='perform_Sing'></option>
+                  <option value='profession'>profession</option>
+                  <option value='ride'>ride</option>
+                  <option value='sense_motive'>sense_motive</option>
+                  <option value='sleight_of_hand'>sleight_of_hand</option>
+                  <option value='spellcraft'>spellcraft</option>
+                  <option value='stealth'>stealth</option>
+                  <option value='survival'>survival</option>
+                  <option value='swim'>swim</option>
+                  <option value='use_magic_device'>use_magic_device</option>
+                </select>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='span1'>
+                Value:
+              </div>
+              <div class='span1'>
+                <input type='number' name='value'>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='span1'>
+                Type:
+              </div>
+              <div class='span1'>
+                <input type='text' name='type'>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='span1'>
+                <input type='submit' class='btn' value='Add'>
+              </div>
+            </div>
+          </form>
+          <form method='post' action='/removeSkillMod'>
+            <div class='row'>
+              <div class='span10'>
+                <h2>Remove Skill Mod</h2>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='span2'>
+                <select name='remove'>
+                  {#skillMod}
+                    <option value="{Skill}:{value}:{type}">{Skill}:{value}:{type}</option>
+                  {/skillMod}
+                </select>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='span2'>
+                <input type='submit' class='btn' value='Remove'>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="tab-pane" id="discriptionContainer">
+          <form action="/submitDiscription" method="post">
+            <div class="row">
+              <div class="span3"><input name="name" placeholder="Name" type="text" value="{description.name}"/></div>
+              <div class="span3"><input name="player" placeholder="Player" type="text" value="{description.player}"/></div>
+            </div>
+            <div class="row">
+              <div class="span2"><input class="input-small" name="age" placeholder="Age" type="text" value="{description.age}"/></div>
+              <div class="span2"><input class="input-small" name="height" placeholder="Height" type="text" value="{description.hieght}"/></div>
+              <div class="span2"><input class="input-small" name="weight" placeholder="Weight" type="text" value="{description.weight}"/></div>
+            </div>
+            <div class="row">
+              <div class="span3"><input name="deity" placeholder="Deity" type="text" value="{description.deity}"/></div>
+              <div class="span3"><input name="alignment" placeholder="Alignment" type="text" value="{description.alignment}"/></div>
+            </div>
+            <div class="row">
+              <div class="span1 offset1"><input type="submit" class="btn btn-primary" value="Update"/></div>
+            </div>
+          </form>
+        </div>
+        <div class="tab-pane" id="ACandSavesContainer">
+          AC
+        </div>
+        <div class="tab-pane" id="combatContainer">
+          Attacks
+        </div>
+        <div class="tab-pane" id="FeatsContainer">
+          <div class='row'>
+            <div class='span'>
+              <h2>Feats</h2>
+            </div>
+          </div>
+          {#feats}
+            <div class='featContainer'>
+              <div class='row'>
+                <div class='span6'>
+                  <b>Name:</b>{name}
+                </div>
+              </div>
+              <div class='row'>
+                <div class='span10'>
+                  <b>Benefit:</b>{Benefit}
+                </div>
+              </div>
+            </div>
+            <br/>
+          {/feats}
+        </div>
+        <div class="tab-pane" id="SpellsContainer">
+          <div class='row'>
+            <div class='span6'>
+              <h2>Spells</h2>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span4'>
+              <h3>Level 0</h3>
+            </div>
+          </div>
+          {>spells spellLV=spells.lvZero /}
+          <div class='row'>
+            <div class='span4'>
+              <h3>Level 1</h3>
+            </div>
+          </div>
+          {>spells spellLV=spells.lvOne /}
+          <div class='row'>
+            <div class='span4'>
+              <h3>Level 2</h3>
+            </div>
+          </div>
+          {>spells spellLV=spells.lvTwo /}
+          <div class='row'>
+            <div class='span4'>
+              <h3>Level 3</h3>
+            </div>
+          </div>
+          {>spells spellLV=spells.lvThree /}
+          <div class='row'>
+            <div class='span4'>
+              <h3>Level 4</h3>
+            </div>
+          </div>
+          {>spells spellLV=spells.lvFour /}
+          <div class='row'>
+            <div class='span4'>
+              <h3>Level 5</h3>
+            </div>
+          </div>
+          {>spells spellLV=spells.lvFive /}
+          <div class='row'>
+            <div class='span4'>
+              <h3>Level 6</h3>
+            </div>
+          </div>
+          {>spells spellLV=spells.lvSix /}
+          <div class='row'>
+            <div class='span4'>
+              <h3>Level 7</h3>
+            </div>
+          </div>
+          {>spells spellLV=spells.lvSeven /}
+          <div class='row'>
+            <div class='span4'>
+              <h3>Level 8</h3>
+            </div>
+          </div>
+          {>spells spellLV=spells.lvEight /}
+          <div class='row'>
+            <div class='span4'>
+              <h3>Level 9</h3>
+            </div>
+          </div>
+          {>spells spellLV=spells.lvNine /}
+        </div>
+        <div class="tab-pane active" id="toDoPageContainer">
+          <div class='row'>
+            <div class='span6'>
+              <h2>To Do</h2>
+            </div>
+          </div>
+          {#to_do}
+          <div class='toDoContainer'>
+            <div class='row'>
+              <form method='post' action='/toDoPage'>
+                <div class='span9'>
+                  <input type='text' value='{to_do}' name='toDo' style='display: none'>{.}
+                </div>
+                <div class='span1'>
+                  <input type='submit' value='Do' class='btn'>
+                </div>
+              </form>
+            </div>
+          </div>
+          <br/>
+          {/to_do}
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <script type="text/javascript" scr="/javascript/bootstrap.js"></script>
+  <script type="text/javascript">
+    document.getElementById('sideBar').addEventListener('click', function (e) {
+      e.preventDefault();
+      var old = document.getElementsByClassName('tab-pane active');
+      for (var i = 0; i < old.length; i++) {
+        old[i].className = "tab-pane";
+      }
+      document.getElementById(e.target.id + "Container").className = "tab-pane active";
+      old = document.getElementsByClassName('selectedTab active');
+      for (var i = 0; i < old.length; i++) {
+        old[i].className = "";
+      }
+      document.getElementById(e.target.id).parentNode.className = 'selectedTab active';
+    });
+    window.addEventListener('load', function (e) {
+        skillCalc('acrobatics', "Dex");
+        skillCalc('appraise', 'Int');
+        skillCalc('bluff', 'Cha');
+        skillCalc('climb', 'Str');
+        skillCalc('craft', 'Int');
+        skillCalc('diplomacy', 'Cha');
+        skillCalc('disable_device', 'Dex');
+        skillCalc('disguise', 'Cha');
+        skillCalc('escape_artist', 'Dex');
+        skillCalc('fly', 'Dex');
+        skillCalc('handle_animal', 'Cha');
+        skillCalc('heal', 'Wis');
+        skillCalc('intimidate', 'Cha');
+        skillCalc('kn_Arcana', 'Int');
+        skillCalc('kn_Dungeoneering', 'Int');
+        skillCalc('kn_Engineering', 'Int');
+        skillCalc('kn_Geography', 'Int');
+        skillCalc('kn_History', 'Int');
+        skillCalc('kn_Local', 'Int');
+        skillCalc('kn_Nature', 'Int');
+        skillCalc('kn_Nobility', 'Int');
+        skillCalc('kn_Planes', 'Int');
+        skillCalc('kn_Religion', 'Int');
+        skillCalc('linguistics', 'Int');
+        skillCalc('perception', 'Wis');
+        skillCalc('perform_Act', 'Cha');
+        skillCalc('perform_Comedy', 'Cha');
+        skillCalc('perform_Dance', 'Cha');
+        skillCalc('perform_Keyboard', 'Cha');
+        skillCalc('perform_Oratory', 'Cha');
+        skillCalc('perform_Percussion', 'Cha');
+        skillCalc('perform_String', 'Cha');
+        skillCalc('perform_Wind', 'Cha');
+        skillCalc('perform_Sing', 'Cha');
+        skillCalc('profession', 'Wis');
+        skillCalc('ride', 'Dex');
+        skillCalc('sense_motive', 'Wis');
+        skillCalc('sleight_of_hand', 'Dex');
+        skillCalc('spellcraft', 'Int');
+        skillCalc('stealth', 'Dex');
+        skillCalc('survival', 'Wis');
+        skillCalc('swim', 'Str');
+        skillCalc('use_magic_device', 'Cha');
+    });
+    document.getElementById('skillsPageContainer').addEventListener('change', function (e) {
+      var skill = e.target.id;
+      if(skill === "acrobaticsRanks"){
+        skillCalc('acrobatics', "Dex");
+      } else if (skill === "appraiseRanks") {
+        skillCalc('appraise', 'Int');
+      } else if (skill === "bluffRanks") {
+        skillCalc('bluff', 'Cha');
+      } else if (skill === "climbRanks") {
+        skillCalc('climb', 'Str');
+      } else if (skill === "craftRanks") {
+        skillCalc('craft', 'Int');
+      } else if (skill === "diplomacyRanks") {
+        skillCalc('diplomacy', 'Cha');
+      } else if (skill === "disable_deviceRanks") {
+        skillCalc('disable_device', 'Dex');
+      } else if (skill === "disguiseRanks") {
+        skillCalc('disguise', 'Cha');
+      } else if (skill === "escape_artistRanks") {
+        skillCalc('escape_artist', 'Dex');
+      } else if (skill === "flyRanks") {
+        skillCalc('fly', 'Dex');
+      } else if (skill === "handle_animalRanks") {
+        skillCalc('handle_animal', 'Cha');
+      } else if (skill === "healRanks") {
+        skillCalc('heal', 'Wis');
+      } else if (skill === "intimidateRanks") {
+        skillCalc('intimidate', 'Cha');
+      } else if (skill === "kn_ArcanaRanks") {
+        skillCalc('kn_Arcana', 'Int');
+      } else if (skill === "kn_DungeoneeringRanks") {
+        skillCalc('kn_Dungeoneering', 'Int');
+      } else if (skill === "kn_EngineeringRanks") {
+        skillCalc('kn_Engineering', 'Int');
+      } else if (skill === "kn_GeographyRanks") {
+        skillCalc('kn_Geography', 'Int');
+      } else if (skill === "kn_HistoryRanks") {
+        skillCalc('kn_History', 'Int');
+      } else if (skill === "kn_LocalRanks") {
+        skillCalc('kn_Local', 'Int');
+      } else if (skill === "kn_NatureRanks") {
+        skillCalc('kn_Nature', 'Int');
+      } else if (skill === "kn_NobilityRanks") {
+        skillCalc('kn_Nobility', 'Int');
+      } else if (skill === "kn_PlanesRanks") {
+        skillCalc('kn_Planes', 'Int');
+      } else if (skill === "kn_ReligionRanks") {
+        skillCalc('kn_Religion', 'Int');
+      } else if (skill === "linguisticsRanks") {
+        skillCalc('linguistics', 'Int');
+      } else if (skill === "perceptionRanks") {
+        skillCalc('perception', 'Wis');
+      } else if (skill === "perform_ActRanks") {
+        skillCalc('perform_Act', 'Cha');
+      } else if (skill === "perform_ComedyRanks") {
+        skillCalc('perform_Comedy', 'Cha');
+      } else if (skill === "perform_DanceRanks") {
+        skillCalc('perform_Dance', 'Cha');
+      } else if (skill === "perform_KeyboardRanks") {
+        skillCalc('perform_Keyboard', 'Cha');
+      } else if (skill === "perform_OratoryRanks") {
+        skillCalc('perform_Oratory', 'Cha');
+      } else if (skill === "perform_PercussionRanks") {
+        skillCalc('perform_Percussion', 'Cha');
+      } else if (skill === "perform_StringRanks") {
+        skillCalc('perform_String', 'Cha');
+      } else if (skill === "perform_WindRanks") {
+        skillCalc('perform_Wind', 'Cha');
+      } else if (skill === "perform_SingRanks") {
+        skillCalc('perform_Sing', 'Cha');
+      } else if (skill === "professionRanks") {
+        skillCalc('profession', 'Wis');
+      } else if (skill === "rideRanks") {
+        skillCalc('ride', 'Dex');
+      } else if (skill === "sense_motiveRanks") {
+        skillCalc('sense_motive', 'Wis');
+      } else if (skill === "sleight_of_handRanks") {
+        skillCalc('sleight_of_hand', 'Dex');
+      } else if (skill === "spellcraftRanks") {
+        skillCalc('spellcraft', 'Int');
+      } else if (skill === "stealthRanks") {
+        skillCalc('stealth', 'Dex');
+      } else if (skill === "survivalRanks") {
+        skillCalc('survival', 'Wis');
+      } else if (skill === "swimRanks") {
+        skillCalc('swim', 'Str');
+      } else if (skill === "use_magic_deviceRanks") {
+        skillCalc('use_magic_device', 'Cha');
+      }
+    });
+    function skillCalc (skill, att) {
+      var totalContainer = document.getElementById(skill);
+      var skillMod = document.getElementsByClassName(skill + 'Mod');
+      var total = 0;
+      var i;
+      if (att === "Str") {
+        total += parseInt({attributeScore.Str}, 10);
+      } else if (att === "Dex") {
+        total += parseInt({attributeScore.Dex}, 10);
+      } else if (att === "Con") {
+        total += parseInt({attributeScore.Con}, 10);
+      } else if (att === "Int") {
+        total += parseInt({attributeScore.Int}, 10);
+      } else if (att === "Wis") {
+        total += parseInt({attributeScore.Wis}, 10);
+      } else if (att === "Cha") {
+        total += parseInt({attributeScore.Cha}, 10);
+      }
+      if (document.getElementById(skill + 'Ranks').value > 0 && totalContainer.className === 'span1 cSkill'){
+        total += parseInt(document.getElementById(skill + 'Ranks').value) + 3;  
+      } else {
+        total += parseInt(document.getElementById(skill + 'Ranks').value);
+      }
+      for (i = 0; i < skillMod.length; i++) {
+        total += parseInt(skillMod[i].innerHTML);
+      }
+      totalContainer.innerHTML = total;
+    }
+  </script>
+</body>
+</html>

@@ -40,7 +40,13 @@ app.get('/', routes.index);
 app.post('/newChar/classSelect', routes.newCharClassSelector);
 app.post('/newChar/raceSelect', routes.newCharRaceSelector);
 app.get('/newChar/attributeSet', routes.newCharAttributeSelector);
-app.post('/toDoPage', routes.toDoPage)
+app.post('/charSheet', routes.charSheet);
+app.post('/submitDiscription', routes.submitDiscription);
+app.post('/updateAttributeMod', routes.updateAttributeMod);
+app.post('/removeAttributeMod', routes.removeAttributeMod);
+app.post('/updateSkills', routes.updateSkills);
+app.post('/addSkillMod', routes.addSkillMod);
+app.post('/removeSkillMod', routes.removeSkillMod);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

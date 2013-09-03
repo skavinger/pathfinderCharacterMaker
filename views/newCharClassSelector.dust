@@ -13,7 +13,7 @@
 		<div class="container">
 		<h1>Select your Class:</h1>
 		<div>Class:</div>
-			<form action="/toDoPage" method="post">
+			<form action="/charSheet" method="post">
 				<div id="classList">
 					{#classes}
 						<input type="radio" name="playerClass" value="{ClassName}"/>{ClassName}
@@ -44,7 +44,6 @@
 					visable[i].className = "hidden";
 				}
 				document.getElementById(selected.value).className = "visable";
-				console.log(document.getElementById(selected.value));
 			});
 		</script>
 	</body>

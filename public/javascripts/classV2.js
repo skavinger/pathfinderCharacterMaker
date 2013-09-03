@@ -37,7 +37,6 @@ exports.classes = {
       "classFeatures" : {
         "one" : {
           "feat" : function (player) {
-            console.log(player);
             player.to_do.push("addFighterFeat");
           },
           "classSkills" : function (player) {
@@ -45,41 +44,46 @@ exports.classes = {
             player.classSkills.craft = 1;
             player.classSkills.handelAnimal = 1;
             player.classSkills.intimidate = 1;
-            player.classSkills.knowledgeDungeoneering = 1;
-            player.classSkills.knowledgeEngineering = 1;
+            player.classSkills.kn_Dungeoneering = 1;
+            player.classSkills.kn_Engineering = 1;
             player.classSkills.profession = 1;
             player.classSkills.ride = 1;
             player.classSkills.survival = 1;
             player.classSkills.swim = 1;
           },
           "weaponProficiency" : function (player) {
-            player.feats["Simple Weapon Proficiency"] = {
+            player.feats.push({
+              "name" : "Simple Weapon Proficiency",
               "Benefit" : " You make attack rolls with simple weapons without penalty.",
               "catagory" : ["Combat"],
               "prereq" : ["—"]
-            };
-            player.feats["Martial Weapon Proficiency"] = {
+            });
+            player.feats.push({
+              "name" : "Martial Weapon Proficiency",
               "Benefit" : " You make attack rolls with the selected weapon normally (without the non-proficient penalty).",
               "catagory" : ["Combat"],
               "prereq" : ["—"]
-            };
+            });
           },
           "armorProficiency" : function (player) {
-            player.feats["Armor Proficiency, Light"] = {
-              "Benefit" : " When you wear light armor, the armor check penalty for that armor applies only to Dexterity- and Strength-based skill checks.",
+            player.feats.push({
+              "name" : "Armor Proficiency, Light",
+              "Benefit" : "When you wear light armor, the armor check penalty for that armor applies only to Dexterity- and Strength-based skill checks.",
               "catagory" : ["Combat"],
               "prereq" : ["—"]
-            };
-            player.feats["Armor Proficiency, Medium"] = {
-              "Benefit" : " See Armor Proficiency, Light.",
+            });
+            player.feats.push({
+              "name" : "Armor Proficiency, Medium",
+              "Benefit" : "When you wear medium armor, the armor check penalty for that armor applies only to Dexterity- and Strength-based skill checks.",
               "catagory" : ["Combat"],
               "prereq" : ["Armor Proficiency, Light"]
-            };
-            player.feats["Armor Proficiency, Heavy"] = {
-              "Benefit" : " See Armor Proficiency, Light.",
+            });
+            player.feats.push({
+              "name" : "Armor Proficiency, Heavy",
+              "Benefit" : "When you wear heavy armor, the armor check penalty for that armor applies only to Dexterity- and Strength-based skill checks.",
               "catagory" : ["Combat"],
               "prereq" : ["Armor Proficiency, Medium"]
-            };
+            });
           }
         },
         "two" : {
@@ -247,23 +251,43 @@ exports.classes = {
 
         fighterBuild.classFeatures.two.hawkeye = function (player) {
           player.combatNotes["Hawkeye (Ex)"] = "the range increment for any bow he uses increases by 5 feet";
-          player.skillMod.perception = player.skillMod.perception + 1;
+          player.skillMod.push({
+            "Skill" : "perception",
+            "value" : 1,
+            "type" : "compitance"
+          });
         };
         fighterBuild.classFeatures.six.hawkeye = function (player) {
           player.combatNotes["Hawkeye (Ex)"] = "the range increment for any bow he uses increases by 10 feet";
-          player.skillMod.perception = player.skillMod.perception + 1;
+          player.skillMod.push({
+            "Skill" : "perception",
+            "value" : 1,
+            "type" : "compitance"
+          });
         };
         fighterBuild.classFeatures.ten.hawkeye = function (player) {
           player.combatNotes["Hawkeye (Ex)"] = "the range increment for any bow he uses increases by 15 feet";
-          player.skillMod.perception = player.skillMod.perception + 1;
+          player.skillMod.push({
+            "Skill" : "perception",
+            "value" : 1,
+            "type" : "compitance"
+          });
         };
         fighterBuild.classFeatures.fourteen.hawkeye = function (player) {
           player.combatNotes["Hawkeye (Ex)"] = "the range increment for any bow he uses increases by 20 feet";
-          player.skillMod.perception = player.skillMod.perception + 1;
+          player.skillMod.push({
+            "Skill" : "perception",
+            "value" : 1,
+            "type" : "compitance"
+          });
         };
         fighterBuild.classFeatures.eighteen.hawkeye = function (player) {
           player.combatNotes["Hawkeye (Ex)"] = "the range increment for any bow he uses increases by 25 feet";
-          player.skillMod.perception = player.skillMod.perception + 1;
+          player.skillMod.push({
+            "Skill" : "perception",
+            "value" : 1,
+            "type" : "compitance"
+          });
         };
 
         delete fighterBuild.classFeatures.three.armorTraining;

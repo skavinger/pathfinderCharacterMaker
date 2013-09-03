@@ -51,73 +51,93 @@ exports.races = {
     "defaultBuild" : {
       "Size" : function (player) {
         player.size = "Meddium";
+        return player;
       },
       "Speed" : function (player) {
-        player.speed.ground = 30;
+        player.speed.push({
+          "type" : "Ground",
+          "value" : 30
+        });
+        return player;
       },
       "language" : function (player) {
         player.languages.push("Common");
+        return player;
       },
       "feat" : function (player) {
         player.to_do.push("addFeat");
+        return player;
       },
       "skills" : function (player) {
         player.onLv.humanSkills = function (player, lv) {
           player.skillPoints = player.skillPoints + lv;
         };
+        return player;
       }
     },
     "altTraits" : {
       "Attribute" : function (build, Attribute) {
         if (Attribute === "Str") {
           build.attribute = function (player) {
-            player.attributeMod.Human = {
+            player.attributeMod.push({
               "Attribute" : "Str",
-              "value" : 2
-            };
+              "value" : 2,
+              "type" : "racial"
+            });
             return player;
           };
         } else if (Attribute === "Dex") {
           build.attribute = function (player) {
-            player.attributeMod.Human = {
+            player.attributeMod.push({
               "Attribute" : "Dex",
-              "value" : 2
-            };
+              "value" : 2,
+              "type" : "racial"
+
+            });
             return player;
           };
         } else if (Attribute === "Con") {
           build.attribute = function (player) {
-            player.attributeMod.Human = {
+            player.attributeMod.push({
               "Attribute" : "Con",
-              "value" : 2
-            };
+              "value" : 2,
+              "type" : "racial"
+
+            });
             return player;
           };
         } else if (Attribute === "Int") {
           build.attribute = function (player) {
-            player.attributeMod.Human = {
+            player.attributeMod.push({
               "Attribute" : "Int",
-              "value" : 2
-            };
+              "value" : 2,
+              "type" : "racial"
+
+            });
             return player;
           };
         } else if (Attribute === "Wis") {
           build.attribute = function (player) {
-            player.attributeMod.Human = {
+            player.attributeMod.push({
               "Attribute" : "Wis",
-              "value" : 2
-            };
+              "value" : 2,
+              "type" : "racial"
+
+            });
             return player;
           };
         } else if (Attribute === "Cha") {
           build.attribute = function (player) {
-            player.attributeMod.Human = {
+            player.attributeMod.push({
               "Attribute" : "Cha",
-              "value" : 2
-            };
+              "value" : 2,
+              "type" : "racial"
+
+            });
             return player;
           };
         }
+        return build;
       }
     }
   },
@@ -125,35 +145,47 @@ exports.races = {
     "defaultBuild" : {
       "AttributeMod" : function (player, Attribute) {
         if (Attribute === "Str") {
-          player.AttributeMod.HalfOrc = {
-            "Attribute" : "Str",
-            "value" : 2
-          };
+          player.AttributeMod.push({
+              "Attribute" : "Str",
+              "value" : 2,
+              "type" : "racial"
+
+            });
         } else if (Attribute === "Dex") {
-          player.AttributeMod.HalfOrc = {
-            "Attribute" : "Dex",
-            "value" : 2
-          };
+          player.AttributeMod.push({
+              "Attribute" : "Str",
+              "value" : 2,
+              "type" : "racial"
+
+            });
         } else if (Attribute === "Con") {
-          player.AttributeMod.HalfOrc = {
-            "Attribute" : "Con",
-            "value" : 2
-          };
+          player.AttributeMod.push({
+              "Attribute" : "Str",
+              "value" : 2,
+              "type" : "racial"
+
+            });
         } else if (Attribute === "Int") {
-          player.AttributeMod.HalfOrc = {
-            "Attribute" : "Int",
-            "value" : 2
-          };
+          player.AttributeMod.push({
+              "Attribute" : "Str",
+              "value" : 2,
+              "type" : "racial"
+
+            });
         } else if (Attribute === "Wis") {
-          player.AttributeMod.HalfOrc = {
-            "Attribute" : "Wis",
-            "value" : 2
-          };
+          player.AttributeMod.push({
+              "Attribute" : "Str",
+              "value" : 2,
+              "type" : "racial"
+
+            });
         } else if (Attribute === "Cha") {
-          player.AttributeMod.HalfOrc = {
-            "Attribute" : "Cha",
-            "value" : 2
-          };
+          player.AttributeMod.push({
+              "Attribute" : "Str",
+              "value" : 2,
+              "type" : "racial"
+
+            });
         }
       },
       "Size" : function (player) {
@@ -167,27 +199,34 @@ exports.races = {
         player.languages.push("Orc");
       },
       "Intimidating" : function (player) {
-        player.skillMods.intimidate = player.skillMods.intimidate + 2;
+        player.skillMod.push({
+          "Skill" : "intimidate",
+          "value" : 2,
+          "type" : "racial"
+        });
       },
       "OrcFerocity" : function (player) {
         player.combatNotes["Orc Ferocity"] = "Once per day, when a half-orc is brought below 0 hit points but not killed, he can fight on for 1 more round as if disabled. At the end of his next turn, unless brought to above 0 hit points, he immediately falls unconscious and begins dying.";
       },
       "WeaponFamiliarity" : function (player) {
-        player.feats["Martial Weapon Proficiency(Greataxes)"] =  {
+        player.feats.push({
+          "name" : "Martial Weapon Proficiency(Greataxes)",
           "Benefit" : " You make attack rolls with the selected weapon normally (without the non-proficient penalty).",
           "catagory" : ["Combat"],
           "prereq" : ["—"]
-        };
-        player.feats["Martial Weapon Proficiency(Falchions)"] =  {
+        });
+        player.feats.push({
+          "name" : "Martial Weapon Proficiency(Falchions)",
           "Benefit" : " You make attack rolls with the selected weapon normally (without the non-proficient penalty).",
           "catagory" : ["Combat"],
           "prereq" : ["—"]
-        };
-        player.feats["Martial Weapon Proficiency(Orc Weapons)"] =  {
+        });
+        player.feats.push({
+          "name" : "Martial Weapon Proficiency(Orc Weapons)",
           "Benefit" : " You make attack rolls with the selected weapon normally (without the non-proficient penalty).",
           "catagory" : ["Combat"],
           "prereq" : ["—"]
-        };
+        });
       },
       "Darkvision" : function (player) {
         player.generalNotes.Darkvision = "Half-orcs can see in the dark up to 60 feet.";
@@ -249,7 +288,11 @@ exports.races = {
         player.todo.push("addSkillFocusFeat");
       },
       "KeenSenses" : function (player) {
-        player.skillMods.perception += 2;
+        player.skillMod.push({
+          "Skill" : "perception",
+          "value" : 2,
+          "type" : "racial"
+        });
       },
       "LowLightVision" : function (player) {
         player.generalNotes["Low-Light Vision"] = "Half-elves can see twice as far as humans in conditions of dim light.";

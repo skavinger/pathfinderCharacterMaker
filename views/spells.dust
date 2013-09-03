@@ -1,0 +1,75 @@
+{#spellLV}
+  <div class='row' id='{name}'>
+    <div class='span2'>
+      {className}
+    </div>
+    <div class='span2'>
+      {name}
+    </div>
+  </div>
+  <div class='hidden' id='{name}Contents'>
+    {?school}
+      <div class='row'>
+        <div class='span1'>
+          School: {school}
+        </div>
+      </div>
+    {/school}
+    {?castTime}
+      <div class='row'>
+        <div class='span1'>
+          Casting Time: {castTime}
+        </div>
+      </div>
+    {/castTime}
+    {?components}
+      <div class='row'>
+        <div class='span1'>
+          Components: {components}
+        </div>
+      </div>
+    {/components}
+    {?range}
+      <div class='row'>
+        <div class='span1'>
+          Range: {range}
+        </div>
+      </div>
+    {/range}
+    {?target}
+      <div class='row'>
+        <div class='span1'>
+          Target: {target}
+        </div>
+      </div>
+    {/target}
+    {?duration}
+      <div class='row'>
+            <div class='span1'>
+              Duration: {duration}
+            </div>
+          </div>
+    {/duration}
+    {?save}
+      <div class='row'>
+            <div class='span1'>
+              Save: {save}
+            </div>
+          </div>
+    {/save}
+    {?sr}
+      <div class='row'>
+            <div class='span1'>
+              Duration: {sr}
+            </div>
+          </div>
+    {/sr}
+    {?description}
+      <div class='row'>
+        <div class='span6'>
+          Description: {description}
+        </div>
+      </div>
+    {/description}
+  </div>
+{/spellLV}

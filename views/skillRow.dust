@@ -1,0 +1,17 @@
+<div class="row skillRow">
+  <div class="span2 {?classSkill}cSkill{/classSkill}">
+    {skillName}
+  </div>
+  <div class="span1 {?classSkill}cSkill{/classSkill}" id="{skillName}">
+  </div>
+  <div class="span2">
+    <input type="number" id="{skillName}Ranks" name="{skillName}Ranks" class="input-small" min="0" value="{skillVal}"/>
+  </div>
+  {#skillMods}
+    {@if cond="'{Skill}' == '{skillName}'"}
+      <div class="span1 {skillName}Mod" title="{type}">
+        {value}
+      </div>
+    {/if}
+  {/skillMods}
+</div>
