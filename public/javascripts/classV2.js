@@ -107,14 +107,16 @@ exports.classes = {
         },
         "five" : {
           "weaponsTraining" : function (player) {
-            player.AtkMod["Weapon Training (Ex)"] = {
+            player.AtkMod.push({
+              "name" : "Weapon Training (Ex)",
               "type" : "misc",
               "value" : 1
-            };
-            player.DamMod["Weapon Training (Ex)"] = {
+            });
+            player.DamMod.push({
+              "name" : "Weapon Training (Ex)",
               "type" : "misc",
               "value" : 1
-            };
+            });
           }
         },
         "six" : {
@@ -138,14 +140,16 @@ exports.classes = {
         },
         "nine" : {
           "weaponsTraining" : function (player) {
-            player.AtkMod["Weapon Training (Ex)"] = {
+            player.AtkMod.push({
+              "name" : "Weapon Training (Ex)",
               "type" : "misc",
               "value" : 2
-            };
-            player.DamMod["Weapon Training (Ex)"] = {
+            });
+            player.DamMod.push({
+              "name" : "Weapon Training (Ex)",
               "type" : "misc",
               "value" : 2
-            };
+            });
           }
         },
         "ten" : {
@@ -169,14 +173,16 @@ exports.classes = {
         },
         "thirteen" : {
           "weaponsTraining" : function (player) {
-            player.AtkMod["Weapon Training (Ex)"] = {
+            player.AtkMod.push({
+              "name" : "Weapon Training (Ex)",
               "type" : "misc",
               "value" : 3
-            };
-            player.DamMod["Weapon Training (Ex)"] = {
+            });
+            player.DamMod.push({
+              "name" : "Weapon Training (Ex)",
               "type" : "misc",
               "value" : 3
-            };
+            });
           }
         },
         "fourteen" : {
@@ -200,14 +206,16 @@ exports.classes = {
         },
         "seventeen" : {
           "weaponsTraining" : function (player) {
-            player.AtkMod["Weapon Training (Ex)"] = {
+            player.AtkMod.push({
+              "name" : "Weapon Training (Ex)",
               "type" : "misc",
               "value" : 4
-            };
-            player.DamMod["Weapon Training (Ex)"] = {
+            });
+            player.DamMod.push({
+              "name" : "Weapon Training (Ex)",
               "type" : "misc",
               "value" : 4
-            };
+            });
           }
         },
         "eighteen" : {
@@ -236,7 +244,10 @@ exports.classes = {
             player.to_do.push("addFighterFeat");
           },
           "weaponMastery" : function (player) {
-            player.combatNotes["Weapon Mastery (Ex)"] = "Auto confirm critical hits and increase critical multipier by 1";
+            player.combatNotes.push({
+              "name":"Weapon Mastery (Ex)", 
+              "description" :"Auto confirm critical hits and increase critical multipier by 1"
+            });
           }
         }
       }
@@ -250,7 +261,10 @@ exports.classes = {
         delete fighterBuild.classFeatures.eighteen.bravery;
 
         fighterBuild.classFeatures.two.hawkeye = function (player) {
-          player.combatNotes["Hawkeye (Ex)"] = "the range increment for any bow he uses increases by 5 feet";
+          player.combatNotes.push({
+            "name": "Hawkeye (Ex)",
+            "description" : "the range increment for any bow he uses increases by 5 feet"
+          });
           player.skillMod.push({
             "Skill" : "perception",
             "value" : 1,
@@ -258,7 +272,11 @@ exports.classes = {
           });
         };
         fighterBuild.classFeatures.six.hawkeye = function (player) {
-          player.combatNotes["Hawkeye (Ex)"] = "the range increment for any bow he uses increases by 10 feet";
+          for(i = 0; i < combatNotes.length; i++){
+            if (combatNotes[i].name === "Hawkeye (Ex)") {
+              combatNotes[i].description =  "the range increment for any bow he uses increases by 10 feet";
+            };
+          }
           player.skillMod.push({
             "Skill" : "perception",
             "value" : 1,
@@ -266,7 +284,11 @@ exports.classes = {
           });
         };
         fighterBuild.classFeatures.ten.hawkeye = function (player) {
-          player.combatNotes["Hawkeye (Ex)"] = "the range increment for any bow he uses increases by 15 feet";
+          for(i = 0; i < combatNotes.length; i++){
+            if (combatNotes[i].name === "Hawkeye (Ex)") {
+              combatNotes[i].description =  "the range increment for any bow he uses increases by 15 feet";
+            };
+          }
           player.skillMod.push({
             "Skill" : "perception",
             "value" : 1,
@@ -274,7 +296,11 @@ exports.classes = {
           });
         };
         fighterBuild.classFeatures.fourteen.hawkeye = function (player) {
-          player.combatNotes["Hawkeye (Ex)"] = "the range increment for any bow he uses increases by 20 feet";
+          for(i = 0; i < combatNotes.length; i++){
+            if (combatNotes[i].name === "Hawkeye (Ex)") {
+              combatNotes[i].description =  "the range increment for any bow he uses increases by 20 feet";
+            };
+          }
           player.skillMod.push({
             "Skill" : "perception",
             "value" : 1,
@@ -282,7 +308,11 @@ exports.classes = {
           });
         };
         fighterBuild.classFeatures.eighteen.hawkeye = function (player) {
-          player.combatNotes["Hawkeye (Ex)"] = "the range increment for any bow he uses increases by 25 feet";
+          for(i = 0; i < combatNotes.length; i++){
+            if (combatNotes[i].name === "Hawkeye (Ex)") {
+              combatNotes[i].description =  "the range increment for any bow he uses increases by 25 feet";
+            };
+          }
           player.skillMod.push({
             "Skill" : "perception",
             "value" : 1,
@@ -297,76 +327,105 @@ exports.classes = {
         delete fighterBuild.classFeatures.nineteen.armorTraining;
 
         fighterBuild.classFeatures.three.trickShot = function (player) {
-          player.combatNotes["Trick Shot (Ex)"] = "choose 1 :disarm, feint, or sunder. He can perform this action with a bow against any target within 30 feet, with a –4 penalty to his CMB";
+          player.combatNotes.push({
+            "name" : "Trick Shot (Ex)", 
+            "description" : "choose 1 :disarm, feint, or sunder. He can perform this action with a bow against any target within 30 feet, with a –4 penalty to his CMB"
+          });
         };
         fighterBuild.classFeatures.seven.trickShot = function (player) {
-          player.combatNotes["Trick Shot (Ex)"] = "choose 2 :disarm, feint, or sunder. He can perform this action with a bow against any target within 30 feet, with a –4 penalty to his CMB";
+          for(i = 0; i < combatNotes.length; i++){
+            if (combatNotes[i].name === "Trick Shot (Ex)") {
+              combatNotes[i].description =  "choose 2 :disarm, feint, or sunder. He can perform this action with a bow against any target within 30 feet, with a –4 penalty to his CMB";
+            };
+          }
         };
         fighterBuild.classFeatures.eleven.trickShot = function (player) {
-          player.combatNotes["Trick Shot (Ex)"] = "choose 3 :disarm, feint, sunderbull rush, grapple, or trip. A target grappled by an arrow can break free by destroying the archer’s arrow (hardness 5, hit points 1, break DC 13) or with an Escape Artist or CMB check (against the archer’s CMD –4). He can perform this action with a bow against any target within 30 feet, with a –4 penalty to his CMB";
+          for(i = 0; i < combatNotes.length; i++){
+            if (combatNotes[i].name === "Trick Shot (Ex)") {
+              combatNotes[i].description =  "choose 3 :disarm, feint, sunderbull rush, grapple, or trip. A target grappled by an arrow can break free by destroying the archer’s arrow (hardness 5, hit points 1, break DC 13) or with an Escape Artist or CMB check (against the archer’s CMD –4). He can perform this action with a bow against any target within 30 feet, with a –4 penalty to his CMB";
+            };
+          }
         };
         fighterBuild.classFeatures.fifthteen.trickShot = function (player) {
-          player.combatNotes["Trick Shot (Ex)"] = "choose 4 :disarm, feint, sunderbull rush, grapple, or trip. A target grappled by an arrow can break free by destroying the archer’s arrow (hardness 5, hit points 1, break DC 13) or with an Escape Artist or CMB check (against the archer’s CMD –4). He can perform this action with a bow against any target within 30 feet, with a –4 penalty to his CMB";
+          for(i = 0; i < combatNotes.length; i++){
+            if (combatNotes[i].name === "Trick Shot (Ex)") {
+              combatNotes[i].description =  "choose 4 :disarm, feint, sunderbull rush, grapple, or trip. A target grappled by an arrow can break free by destroying the archer’s arrow (hardness 5, hit points 1, break DC 13) or with an Escape Artist or CMB check (against the archer’s CMD –4). He can perform this action with a bow against any target within 30 feet, with a –4 penalty to his CMB";
+            };
+          }
         };
         fighterBuild.classFeatures.nineteen.trickShot = function (player) {
-          player.combatNotes["Trick Shot (Ex)"] = "choose 5 :disarm, feint, sunderbull rush, grapple, or trip. A target grappled by an arrow can break free by destroying the archer’s arrow (hardness 5, hit points 1, break DC 13) or with an Escape Artist or CMB check (against the archer’s CMD –4). He can perform this action with a bow against any target within 30 feet, with a –4 penalty to his CMB";
+          for(i = 0; i < combatNotes.length; i++){
+            if (combatNotes[i].name === "Trick Shot (Ex)") {
+              combatNotes[i].description =  "choose 5 :disarm, feint, sunderbull rush, grapple, or trip. A target grappled by an arrow can break free by destroying the archer’s arrow (hardness 5, hit points 1, break DC 13) or with an Escape Artist or CMB check (against the archer’s CMD –4). He can perform this action with a bow against any target within 30 feet, with a –4 penalty to his CMB";
+            };
+          }
         };
-
         delete fighterBuild.classFeatures.five.weaponsTraining;
 
         fighterBuild.classFeatures.five.expertArcher = function (player) {
-          player.AtkMod["Expert Archer (Ex)"] = {
+          player.AtkMod.push({
+            "name" : "Expert Archer (Ex)",
             "type" : "misc",
             "value" : 1,
             "requirement" : "Bow"
-          };
-          player.DamMod["Expert Archer (Ex)"] = {
+          });
+          player.DamMod.push({
+            "name" : "Expert Archer (Ex)",
             "type" : "misc",
             "value" : 1,
             "requirement" : "Bow"
-          };
+          });
         };
         fighterBuild.classFeatures.nine.expertArcher = function (player) {
-          player.AtkMod["Expert Archer (Ex)"] = {
+          player.AtkMod.push({
+            "name" : "Expert Archer (Ex)",
             "type" : "misc",
             "value" : 2,
             "requirement" : "Bow"
-          };
-          player.DamMod["Expert Archer (Ex)"] = {
+          });
+          player.DamMod.push({
+            "name" : "Expert Archer (Ex)",
             "type" : "misc",
             "value" : 2,
             "requirement" : "Bow"
-          };
+          });
         };
         fighterBuild.classFeatures.thirteen.expertArcher = function (player) {
-          player.AtkMod["Expert Archer (Ex)"] = {
+          player.AtkMod.push({
+            "nmae" : "Expert Archer (Ex)",
             "type" : "misc",
             "value" : 3,
             "requirement" : "Bow"
-          };
-          player.DamMod["Expert Archer (Ex)"] = {
+          });
+          player.DamMod.push({
+            "name" : "Expert Archer (Ex)",
             "type" : "misc",
             "value" : 3,
             "requirement" : "Bow"
-          };
+          });
         };
         fighterBuild.classFeatures.seventeen.expertArcher = function (player) {
-          player.AtkMod["Expert Archer (Ex)"] = {
+          player.AtkMod.push({
+            "name" : "Expert Archer (Ex)",
             "type" : "misc",
             "value" : 4,
             "requirement" : "Bow"
-          };
-          player.DamMod["Expert Archer (Ex)"] = {
+          });
+          player.DamMod.push({
+            "name" : "Expert Archer (Ex)",
             "type" : "misc",
             "value" : 4,
             "requirement" : "Bow"
-          };
+          });
         };
 
         delete fighterBuild.classFeatures.nine.weaponsTraining;
 
         fighterBuild.classFeatures.nine.safeShot = function (player) {
-          player.combatNotes["Safe Shot (Ex)"] = "an archer does not provoke attacks of opportunity when making ranged attacks with a bow";
+          player.combatNotes.push({
+            "name" : "Safe Shot (Ex)" ,
+            "description" : "an archer does not provoke attacks of opportunity when making ranged attacks with a bow"
+          });
         };
 
         delete fighterBuild.classFeatures.thirteen.weaponsTraining;
@@ -389,7 +448,10 @@ exports.classes = {
         delete fighterBuild.classFeatures.seventeen.weaponsTraining;
 
         fighterBuild.classFeatures.seventeen.volley = function (player) {
-          player.combatNotes["Volley (Ex)"] = "as a full-round action, an archer can make a single bow attack at his highest base attack bonus against any number of creatures in a 15-foot radius burst, making separate attack and damage rolls for each creature.";
+          player.combatNotes.push({
+            "name" : "Volley (Ex)", 
+            "description" : "as a full-round action, an archer can make a single bow attack at his highest base attack bonus against any number of creatures in a 15-foot radius burst, making separate attack and damage rolls for each creature."
+          });
         };
 
         delete fighterBuild.classFeatures.nineteen.armorMastery;
@@ -400,11 +462,17 @@ exports.classes = {
             "weakness" : "-",
             "requirement" : "vs Ranged"
           };
-          player.combatNotes["Ranged Defense (Ex)"] = "as an immediate action, he can catch an arrow fired at him and shoot it any target he chooses, as if he had the Snatch Arrows feat.";
+          player.combatNotes.push({
+            "name" : "Ranged Defense (Ex)",
+            "description" : "as an immediate action, he can catch an arrow fired at him and shoot it any target he chooses, as if he had the Snatch Arrows feat."
+          });
         };
 
         fighterBuild.classFeatures.twenty.weaponMastery = function (player) {
-          player.combatNotes["Weapon Mastery (Ex)"] = "Auto confirm critical hits and increase critical multipier by 1 with bows";
+          player.combatNotes.push({
+            "name" : "Weapon Mastery (Ex)",
+            "description" : "Auto confirm critical hits and increase critical multipier by 1 with bows"
+          });
         };
         return fighterBuild;
       },
@@ -489,17 +557,27 @@ exports.classes = {
         delete fighterBuild.classFeatures.seventeen.weaponsTraining;
 
         fighterBuild.classFeatures.nine.fortification = function (player) {
-          player.combatNotes["Fortification (Ex)"] = "25% chance to negate critical hits and sneak attacks";
+          player.combatNotes.push({
+            "name" : "Fortification (Ex)",
+            "description" : "25% chance to negate critical hits and sneak attacks"
+          });
         };
 
         fighterBuild.classFeatures.thirteen.fortification = function (player) {
-          player.combatNotes["Fortification (Ex)"] = "50% chance to negate critical hits and sneak attacks";
+          for(i = 0; i < combatNotes.length; i++){
+            if (combatNotes[i].name === "Fortification (Ex)") {
+              combatNotes[i].description =  "50% chance to negate critical hits and sneak attacks";
+            };
+          }
         };
 
         delete fighterBuild.classFeatures.twenty.weaponMastery;
 
         fighterBuild.classFeatures.twenty.indestructible = function (player) {
-          player.combatNotes["Indestructible (Ex)"] = "complete immunity to critical hits and sneak attacks while he is wearing armor. In addition, unless his armor has the fragile armor quality, it cannot be sundered while he is wearing it.";
+          player.combatNotes.push({
+            "name" : "Indestructible (Ex)",
+            "description" : "complete immunity to critical hits and sneak attacks while he is wearing armor. In addition, unless his armor has the fragile armor quality, it cannot be sundered while he is wearing it."
+          });
         };
         return fighterBuild;
       },

@@ -329,10 +329,217 @@
           </form>
         </div>
         <div class="tab-pane" id="ACandSavesContainer">
-          AC
+          <div class='row'>
+            <div class='span2'>
+              <h3>AC</h3>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span1'>
+                Name
+              </div>
+            <div class='span1'>
+              <b>Total</b>
+            </div>
+            <div class='span1'>
+              Armor
+            </div>
+            <div class='span1'>
+              Sheild
+            </div>
+            <div class='span1'>
+              Dex
+            </div>
+            <div class='span1'>
+              Size
+            </div>
+            <div class='span1'>
+              Dodge
+            </div>
+            <div class='span1'>
+              Natural
+            </div>
+            <div class='span1'>
+              Deflect
+            </div>
+            <div class='span1'>
+              Misc.
+            </div>
+          </div>
+          {#ACList}
+            <div class='row'>
+              <div class='span1'>
+                {name}
+              </div>
+              <div class='span1'>
+                <b>{total}</b>
+              </div>
+              <div class='span1'>
+                {armor}
+              </div>
+              <div class='span1'>
+                {sheild}
+              </div>
+              <div class='span1'>
+                {dex}
+              </div>
+              <div class='span1'>
+                {size}
+              </div>
+              <div class='span1'>
+                {dodge}
+              </div>
+              <div class='span1'>
+                {natural}
+              </div>
+              <div class='span1'>
+                {deflect}
+              </div>
+              <div class='span1'>
+                {misc}
+              </div>
+            </div>
+          {/ACList}
+          <div class='row'>
+            <div class='span4'>
+              <h3>Add AC</h3>
+            </div>
+          </div>
+          <form action='/addAC' method='post'>
+            <div class='row'>
+              <div class='span2'>
+                <input type='text' placeholder='Name' name='name' class="input-small">
+              </div>
+              <div class='span2'>
+                <input type='number' placeholder='Armor' name='armor' class="input-small">
+              </div>
+              <div class='span2'>
+                <input type='number' placeholder='Sheild' name='sheild' class="input-small">
+              </div>
+              <div class='span2'>
+                <input type='number' placeholder='Dex' name='dex' class="input-small">
+              </div>
+              <div class='span2'>
+                <input type='number' placeholder='Size' name='sizeMod' class="input-small">
+              </div>
+              <div class='span2'>
+                <input type='number' placeholder='Dodge' name='dodge' class="input-small">
+              </div>
+              <div class='span2'>
+                <input type='number' placeholder='Natrual' name='natural' class="input-small">
+              </div>
+              <div class='span2'>
+                <input type='number' placeholder='Deflect' name='deflect' class="input-small">
+              </div>
+              <div class='span2'>
+                <input type='number' placeholder='Misc.' name='misc' class="input-small">
+              </div>
+              <div class='span4'>
+                <input type='submit' class='btn' value='Add'>
+              </div>
+            </div>
+          </form>
+          <div class='row'>
+            <div class='span2'>
+              <h3>Saves</h3>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='span1'>FORT</div>
+            <div class='span2'>{Fort}</div>
+          </div>
+          <div class='row'>
+            <div class='span1'>REF</div>
+            <div class='span2'>{Ref}</div>
+          </div>
+          <div class='row'>
+            <div class='span1'>WiLL</div>
+            <div class='span2'>{Will}</div>
+          </div>
+          <div class='row'>
+            <div class='span6'>
+              <h3>Save Notes</h3>
+            </div>
+          </div>
         </div>
         <div class="tab-pane" id="combatContainer">
-          Attacks
+          <div class='row'> 
+            <div class='span6'>
+              <h3>Attacks</h3>
+            </div>
+          </div>
+          <div class='row'>
+              <div class='span2'>Name</div>
+              <div class='span2'>Attack</div>
+              <div class='span2'>Damage</div>
+              <div class='span2'>Crit Range</div>
+              <div class='span2'>Crit Multiplier</div>
+          </div>
+          {#attacks}
+            <div class='row'>
+              <div class='span2'>{name}:</div>
+              <div class='span2'>{attack}</div>
+              <div class='span2'>{damage}</div>
+              <div class='span2'>{critRange}-20</div>
+              <div class='span2'>{critMulti}</div>
+            </div>
+          {/attacks}
+          <div class='row'>
+            <div class='span6'>
+              <h3>Add Attacks</h3>
+            </div>
+          </div>
+          <form action='/submitAtk' method='post'>
+            <div class='row'>
+              <div class='span2'>
+                <input class="input-small" name="atkName" placeholder="Name" type="text"/>
+              </div>
+              <div class='span2'>
+                <input class="input-small" name="attack" placeholder="Attack" type="text"/>
+              </div>
+              <div class='span2'>
+                <input class="input-small" name="damage" placeholder="Damage" type="text"/>
+              </div>
+              <div class='span2'>
+                <input class="input-small" name="critRange" placeholder="Crit Range" type="number" max='20'/>-20
+              </div>
+              <div class='span2'>
+                <input class="input-small" name="critMulti" placeholder="Crit Multiplier" type="number"/>
+              </div>
+              <div class='span2'>
+                <input type='submit' class='btn' value='Add'>
+              </div>
+            </div>
+          </form>
+          <div class='row'>
+            <div class='span6'>
+              <h3>Remove Attacks</h3>
+            </div>
+          </div>
+          <form action='/removeAtk' method='post'>
+            <div class='row'>
+              <div class='span4'>
+                <select name='toRemove'>
+                  {#attacks}
+                    <option vlaue='{name}'>{name}</option>
+                  {/attacks}
+                </select>
+                <input type='submit' class='btn' value='Remove'>
+              </div>
+            </div>
+          </form>
+          <div class='row'>
+            <div class='span6'>
+              <h3>Combat Notes</h3>
+            </div>
+          </div>
+          {#combatNotes}
+            <div class='row'>
+              <div class='span10'>
+                {name} : {description}
+              </div>
+            </div>
+          {/combatNotes}
         </div>
         <div class="tab-pane" id="FeatsContainer">
           <div class='row'>

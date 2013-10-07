@@ -153,3 +153,41 @@ exports.removeSkillMod = function (req, res) {
   }
   res.render("charSheet", req.session.character);
 };
+exports.submitAtk = function (req, res) {
+  req.session.character.attacks.push({
+    "name": req.body.atkName,
+    "attack": req.body.attack,
+    "damage": req.body.damage,
+    "critRange": req.body.critRange,
+    "critMulti": req.body.critMulti
+  });
+  res.render("charSheet", req.session.character);
+};
+exports.removeAtk = function (req, res) {
+  var name = req.body.toRemove;
+  var i;
+  for(i = 0; i < req.session.character.attacks.length; i++){
+    if(req.session.character.attacks[i].name === name){
+      req.session.character.attacks.splice(i, 1);
+    }
+  }
+  res.render("charSheet", req.session.character);
+};
+exports.addAC = function (req, res) {
+  var total = 10 + parseInt(req.body.armor) + parseInt(req.body.sheild) + parseInt(req.body.dex) + parseInt(req.body.sizeMod) + parseInt(req.body.dodge) + parseInt(req.body.natural) + parseInt(req.body.deflect) + parseInt(req.body.misc);
+
+  req.session.character.ACList.push({
+    "name" : req.body.name,
+    "total" : total,
+    "armor" : req.body.armor,
+    "sheild" : req.body.sheild,
+    "dex" : req.body.dex,
+    "size" : req.body.sizeMod,
+    "dodge" : req.body.dodge,
+    "natural" : req.body.natural,
+    "deflect" : req.body.deflect,
+    "misc" : req.body.misc
+  });
+
+  res.render("charSheet", req.session.character);
+};

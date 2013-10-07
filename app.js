@@ -47,6 +47,9 @@ app.post('/removeAttributeMod', routes.removeAttributeMod);
 app.post('/updateSkills', routes.updateSkills);
 app.post('/addSkillMod', routes.addSkillMod);
 app.post('/removeSkillMod', routes.removeSkillMod);
+app.post('/removeAtk', routes.removeAtk)
+app.post('/submitAtk', routes.submitAtk);
+app.post('/addAC', routes.addAC);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
